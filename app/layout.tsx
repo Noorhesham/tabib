@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+
 import { Cairo } from "next/font/google";
 import NavBar from "./components/nav/NavBar";
 const inter = Cairo({ subsets: ["latin"], weight: ["400", "600", "700", "200", "300", "500"] });
@@ -17,7 +18,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body dir="rtl" className={`${inter.className}  `}>
-        <main className="">
+        <main data-scroll-container className="main-container">
           <NavBar />
           {children}
         </main>

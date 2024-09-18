@@ -5,6 +5,8 @@ import { splitStringUsingRegex } from "@/lib/utils";
 import { useGSAP } from "@gsap/react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
+import { ArrowLeft } from "lucide-react";
+import useLocoScroll from "../hooks/useLocoScroll";
 
 const AnimatedHeader = () => {
   const words = ["أهلا", " في ", "TABIB", "هدفنا ", "الحفاظ", "علي", "صحتك"];
@@ -33,19 +35,19 @@ const AnimatedHeader = () => {
         y: 0,
         rotateX: 0,
         stagger: 0.3,
-        duration: 1,
+        duration: 0.7,
       }
     );
 
     tl.fromTo(
       ".char",
       { opacity: 0, y: 100, stagger: 0.1, ease: "power2.inOut", rotateX: -90 },
-      { opacity: 1, y: 0, stagger: 0.1, duration: 1, rotateX: 0 }
+      { opacity: 1, y: 0, stagger: 0.1, duration: 0.7, rotateX: 0 }
     );
     tl.fromTo(
       "#heart",
       { clipPath: "circle(0% at 50% 50%)" }, // Start with a small circle
-      { clipPath: "circle(100% at 50% 50%)", duration: 1, ease: "power2.inOut" } // Expand to full size
+      { clipPath: "circle(100% at 50% 50%)", duration: 0.7, ease: "power2.inOut" } // Expand to full size
     );
     tl.fromTo(
       ".title2",
@@ -61,7 +63,7 @@ const AnimatedHeader = () => {
         y: 0,
         rotateX: 0,
         stagger: 0.3,
-        duration: 1,
+        duration: 0.7,
       }
     );
     tl.fromTo(
@@ -81,6 +83,11 @@ const AnimatedHeader = () => {
         duration: 0.5,
       }
     ).to("#img-doc", { rotate: 360, duration: 0.3 });
+    tl.fromTo(
+      "#btn",
+      { opacity: 0, rotate: 45, xPercent: -100 },
+      { opacity: 1, rotate: 0, xPercent: 0, duration: 0.7 }
+    );
     tl.to(".char", { opacity: 0, y: 100, stagger: 0.1, ease: "power2.inOut", rotateX: 90, delay: 1.4 });
     const startInfiniteSwap = () => {
       const tl2 = gsap.timeline({ repeat: -1, repeatDelay: 0.3 });
@@ -99,11 +106,11 @@ const AnimatedHeader = () => {
   }, []);
 
   return (
-    <div className=" h-full flex  items-center py-10">
-      <div className="font-bold flex gap-2 text-center text-7xl">
-        <div className=" flex gap-4 flex-col">
+    <div className=" h-full flex lg:flex-row flex-col  justify-center items-center py-10">
+      <div className="font-bold flex  gap-2 text-center text-5xl lg:text-7xl">
+        <div className=" flex  gap-4 flex-col">
           {/*first 3 words in a flex*/}
-          <div className="flex  gap-2 items-center">
+          <div className="flex  justify-center    flex-wrap gap-2 items-center">
             {words.slice(0, 2).map((word, index) => (
               <p key={index} className="title text-gray-800  animate-text">
                 {word}
@@ -125,18 +132,21 @@ const AnimatedHeader = () => {
           </div>
           {/*last 3 words in a flex*/}
 
-          <div className="flex gap-2  items-center">
+          <div className="flex flex-wrap gap-2  justify-center  items-center">
             {words.slice(3).map((word, index) => (
               <p key={index} className="title2  text-gray-800 animate-text">
                 {word}
               </p>
             ))}
           </div>
+          <Button id="btn" className=" mt-4 py-6 px-12  justify-center w-fit self-center lg:self-start text-4xl ">
+            خدماتنا <ArrowLeft className="w-6 h-6 mr-3 arrow1" />
+          </Button>
         </div>
       </div>
       <div
         id="img-doc"
-        className=" bg-sky-400 border-2 border-sky-400 mr-5 w-52 h-52 relative rounded-full aspect-square overflow-hidden"
+        className=" bg-sky-400 border-2 border-sky-400 mr-5 mt-4 lg:mt-0 w-52 h-52 relative rounded-full aspect-square overflow-hidden"
       >
         <Image src="/doc2.jpg" className=" object-contain" fill alt="tabib" />
       </div>

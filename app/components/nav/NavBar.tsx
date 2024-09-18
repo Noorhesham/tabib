@@ -13,6 +13,7 @@ import { toast } from "react-toastify";
 import MotionItem from "../defaults/MotionItem";
 import { AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
+import useLocoScroll from "@/app/hooks/useLocoScroll";
 const links = [
   {
     text: "تصفح العيادات",
@@ -25,6 +26,7 @@ const links = [
   },
 ];
 const NavBar = () => {
+  const { locoScroll } = useLocoScroll(true);
   const [isScrollingDown, setIsScrollingDown] = useState(false);
   const [active, setIsActive] = useState(false);
   const router = useRouter();
@@ -33,30 +35,43 @@ const NavBar = () => {
   const pathName = usePathname();
   const user = false;
   useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY < 50) {
+    if (!locoScroll) return; // Ensure the scroll instance is available
+
+    const handleLocomotiveScroll = (event: any) => {
+      const currentScrollY = event.scroll.y; // Locomotive Scroll's Y position
+      console.log(currentScrollY);
+      // Update top-page state
+      if (currentScrollY < 50) {
         setIsTopPage(true);
-      } else setIsTopPage(false);
-      if (window.scrollY > lastScrollY) {
+      } else {
+        setIsTopPage(false);
+      }
+
+      // Detect scroll direction
+      if (currentScrollY > lastScrollY) {
         setIsScrollingDown(true);
       } else {
         setIsScrollingDown(false);
       }
-      setLastScrollY(window.scrollY);
+
+      setLastScrollY(currentScrollY);
     };
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [lastScrollY, isTopPage]);
-  const isHome = pathName === "/ar" || pathName === "/en" || pathName.includes("hospital");
+    locoScroll.on("scroll", handleLocomotiveScroll); // Add Locomotive Scroll event listener
+
+    return () => {
+      locoScroll.off("scroll", handleLocomotiveScroll); // Clean up event listener on unmount
+    };
+  }, [scroll, lastScrollY]);
+  const isHome = pathName === "/";
 
   return (
     <header className=" w-full">
       <nav
         className={`${
           isHome
-            ? "text-white font-semibold placeholder:text-white "
-            : `  text-main2 font-semibold placeholder:text-white  ${isScrollingDown && "bg-white/80"}`
+            ? `  font-semibold placeholder:text-white  ${isScrollingDown && "bg-white/80"}`
+            : `  text-main2 font-semibold placeholder:text-white  `
         } fixed inset-0 z-50 max-h-[5rem] lg:max-h-[7rem]    flex flex-col gap-2  py-4 transition-all duration-300 ${
           isScrollingDown
             ? "translate-y-[-110%]"
@@ -66,19 +81,6 @@ const NavBar = () => {
         }`}
       >
         {" "}
-        <AnimatePresence>
-          {(isHome || pathName.includes("aboutus")) && !isTopPage && !isScrollingDown && (
-            <MotionItem
-              nohover
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="absolute inset-0 h-[20rem] bg-gradient-to-b from-black/60 via-transparent to-transparent pointer-events-none z-10"
-            >
-              {null}
-            </MotionItem>
-          )}
-        </AnimatePresence>
         <MaxWidthWrapper noPadding>
           <div
             className={cn(

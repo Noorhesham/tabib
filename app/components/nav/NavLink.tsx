@@ -22,7 +22,7 @@ const NavLink = ({
   subLinks: { text: string; href?: string }[];
   isHome?: boolean;
 }) => {
-  const linkStyles = "uppercase  flex items-center gap-2     text-sm  xl:text-base  ";
+  const linkStyles = "uppercase  flex items-center gap-2 text-gray-900     text-sm  xl:text-base  ";
   if (!subLinks)
     return (
       <Link href={href || "/"} className={linkStyles}>
@@ -38,10 +38,7 @@ const NavLink = ({
         <DropdownMenuContent align="start" className=" w-full rounded-lg">
           {subLinks.map((link) => (
             <DropdownMenuItem className=" uppercase   rounded-sm" key={link.text}>
-              <Link
-                className=" text-xs pr-20 pl-3   py-2  w-full   text-main2 font-semibold  uppercase"
-                href={link.href || "#"}
-              >
+              <Link className=" text-xs pr-20 pl-3   py-2  w-full    font-semibold  uppercase" href={link.href || "#"}>
                 {link.text}
               </Link>
             </DropdownMenuItem>
