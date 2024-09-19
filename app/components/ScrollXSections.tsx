@@ -50,9 +50,9 @@ const ScrollXSections = () => {
   }, []);
 
   return (
-    <div style={{ overflow: "hidden" }}>
-      <div ref={containerRef} className="flex w-[500vw]">
-        <div className="section w-[100vw] h-screen bg-sky-800">
+    <div className="" style={{ overflow: "hidden" }}>
+      <div ref={containerRef} className="flex  max-h-screen w-[500vw]">
+        <div className="section w-[100vw] h-[110vh] lg:h-screen bg-sky-800">
           <MaxWidthWrapper className="flex lg:flex-row h-full  items-center justify-between">
             <MotionItem
               nohover
@@ -79,7 +79,7 @@ const ScrollXSections = () => {
             </MotionItem>
           </MaxWidthWrapper>
         </div>
-        <div className="section w-[100vw] h-screen bg-cyan-700">
+        <div className="section w-[100vw] h-[110vh] lg:h-screen bg-cyan-700">
           <MaxWidthWrapper className="flex lg:flex-row h-full flex-col items-center justify-between">
             <MotionItem
               nohover
@@ -101,7 +101,7 @@ const ScrollXSections = () => {
             </MotionItem>
           </MaxWidthWrapper>
         </div>
-        <div className="section w-[100vw] h-screen  bg-blue-800">
+        <div className="section w-[100vw] h-[110vh] lg:h-screen  bg-blue-800">
           <MaxWidthWrapper className="flex lg:flex-row h-full flex-col items-center justify-between">
             <MotionItem
               nohover

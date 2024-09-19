@@ -6,6 +6,30 @@ import ScrollXSections from "./components/ScrollXSections";
 import "locomotive-scroll/src/locomotive-scroll.scss";
 import React, { useEffect } from "react";
 import Loader from "./components/Loader";
+const cardData = [
+  {
+    text: "AI-Powered Sales Insights",
+    downDesc: "Boost your sales with machine learning",
+    img: "/neural_networks_of_the_brain.glb",
+    three: true,
+  },
+  {
+    text: "Onboard your store",
+    desc: "A 3D store",
+    img: "",
+    three: false,
+    animation: true,
+    btn: true,
+  },
+  {
+    text: "Market Intelligence",
+    downDesc: "Gain competitive advantage with comprehensive market intelligence",
+    img: "/chess_queen.glb",
+    three: true,
+    scale: [1, 1, 1],
+    position: [0, -0.4, 1],
+  },
+];
 
 export default function Home() {
   const [loading, setLoading] = React.useState(true);
