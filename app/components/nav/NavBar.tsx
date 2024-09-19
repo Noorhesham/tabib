@@ -39,7 +39,7 @@ const NavBar = () => {
 
     const handleLocomotiveScroll = (event: any) => {
       const currentScrollY = event.scroll.y; // Locomotive Scroll's Y position
-      console.log(currentScrollY);
+      console.log(isScrollingDown);
       // Update top-page state
       if (currentScrollY < 50) {
         setIsTopPage(true);
@@ -68,10 +68,13 @@ const NavBar = () => {
   return (
     <header className=" w-full">
       <nav
+        style={
+          isScrollingDown
+            ? { background: "rgba(255, 255, 255, 0.8)", transform: "translateY(-1rem)" }
+            : { background: "transparent", transform: "translateY(-2px)" }
+        }
         className={`${
-          isHome
-            ? `  font-semibold placeholder:text-white  ${isScrollingDown && "bg-white/80"}`
-            : `  text-main2 font-semibold placeholder:text-white  `
+          isHome ? `  font-semibold placeholder:text-white  ` : `  text-main2 font-semibold placeholder:text-white  `
         } fixed inset-0 z-50 max-h-[5rem] lg:max-h-[7rem]    flex flex-col gap-2  py-4 transition-all duration-300 ${
           isScrollingDown
             ? "translate-y-[-1rem]"

@@ -2,7 +2,7 @@
 import React, { useEffect, useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
-import useLocoScroll from "../hooks/useLocoScroll";
+
 import MaxWidthWrapper from "./defaults/MaxWidthWrapper";
 import AnimatedImage from "./AnimatedImage";
 import MotionItem from "./defaults/MotionItem";
@@ -60,9 +60,10 @@ const ScrollXSections = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3, delay: 0.2 }}
               className="flex-1 flex flex-col gap-5 px-4 py-2"
-            > 
+            >
               <h2 className="text-gray-50 text-5xl font-bold my-3 lg:text-7xl">ليه ممكن استخدم طبيب ؟</h2>
-              <Paragraph size="lg"
+              <Paragraph
+                size="lg"
                 color="text-gray-50"
                 description="هتقدر تلاقي النصيحة الصح وتتواصل مع الدكتور الي حجزت عنده في ثواني ! مع مميزات الشات السريع والحجز الاونلاين بضغطة زر !"
               />

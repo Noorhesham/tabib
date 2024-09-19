@@ -6,7 +6,6 @@ import { useGSAP } from "@gsap/react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
-import useLocoScroll from "../hooks/useLocoScroll";
 
 const AnimatedHeader = () => {
   const words = ["أهلا", " في ", "TABIB", "هدفنا ", "الحفاظ", "علي", "صحتك"];
