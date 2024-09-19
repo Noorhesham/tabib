@@ -5,9 +5,7 @@
 :root {
   --background: @apply bg-white;
   --foreground: #171717;
-  scroll-behavior: smooth;
 }
-
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
@@ -118,7 +116,12 @@
     transform: translate(10px, 0);
   }
 }
-.main-container {
+
+#smooth-wrapper {
   overflow: hidden;
-  position: relative;
+  height: 100%;
+}
+
+#smooth-content {
+  min-height: 100vh;
 }

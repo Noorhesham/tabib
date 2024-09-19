@@ -20,6 +20,7 @@
     "clsx": "^2.1.1",
     "framer-motion": "^11.5.4",
     "gsap": "^3.12.5",
+    "gsap-trial": "^3.12.5",
     "locomotive-scroll": "^4.1.4",
     "lottie-react": "^2.4.0",
     "lucide-react": "^0.439.0",

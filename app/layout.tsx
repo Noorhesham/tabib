@@ -19,7 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body dir="rtl" className={`${inter.className}  `}>
-        <main data-scroll-container className="main-container">
+        <main id="smooth-wrapper" className="main-container">
           <NavBar />
           {children}
           <Footer />

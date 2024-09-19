@@ -59,7 +59,7 @@ const ScrollXSections = () => {
     <div className="" style={{ overflow: "hidden" }}>
       <div ref={containerRef} className="flex  h-screen w-[500vw]">
         <div className="section w-[100vw] h-[110vh] lg:h-screen ">
-          <MaxWidthWrapper className="flex lg:flex-row h-full  items-center justify-between">
+          <MaxWidthWrapper className="flex md:flex-row h-full  items-center justify-between">
             <MotionItem
               nohover
               initial={{ opacity: 0, y: 100 }}
@@ -85,7 +85,7 @@ const ScrollXSections = () => {
           </MaxWidthWrapper>
         </div>
         <div className="section w-[100vw] h-[110vh] lg:h-screen bg-cyan-700">
-          <MaxWidthWrapper className="flex lg:flex-row h-full flex-col items-center justify-between">
+          <MaxWidthWrapper className="flex md:flex-row h-full flex-col items-center justify-between">
             <MotionItem
               nohover
               initial={{ opacity: 0, y: 100 }}
@@ -112,7 +112,7 @@ const ScrollXSections = () => {
           </MaxWidthWrapper>
         </div>
         <div className="section w-[100vw] h-[110vh] lg:h-screen  bg-blue-800">
-          <MaxWidthWrapper className="flex lg:flex-row h-full flex-col items-center justify-between">
+          <MaxWidthWrapper className="flex md:flex-row h-full flex-col items-center justify-between">
             <MotionItem
               nohover
               initial={{ opacity: 0, y: 100 }}

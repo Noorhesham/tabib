@@ -13,7 +13,7 @@ import { toast } from "react-toastify";
 import MotionItem from "../defaults/MotionItem";
 import { AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
-import useLocoScroll from "@/app/hooks/useLocoScroll";
+import useScrollSmoother from "@/app/hooks/useLocoScroll";
 const links = [
   {
     text: "تصفح العيادات",
@@ -26,7 +26,7 @@ const links = [
   },
 ];
 const NavBar = () => {
-  const { locoScroll } = useLocoScroll(true);
+  useScrollSmoother(true);
   const [isScrollingDown, setIsScrollingDown] = useState(false);
   const [active, setIsActive] = useState(false);
   const router = useRouter();
@@ -35,47 +35,37 @@ const NavBar = () => {
   const pathName = usePathname();
   const user = false;
   useEffect(() => {
-    if (!locoScroll) return;
-
-    const handleLocomotiveScroll = (event: any) => {
-      const currentScrollY = event.scroll.y; // Locomotive Scroll's Y position
-      console.log(isScrollingDown);
-      // Update top-page state
-      if (currentScrollY < 50) {
+    const handleScroll = () => {
+      if (window.scrollY < 50) {
         setIsTopPage(true);
-      } else {
-        setIsTopPage(false);
-      }
-
-      // Detect scroll direction
-      if (currentScrollY > lastScrollY) {
+      } else setIsTopPage(false);
+      if (window.scrollY > lastScrollY) {
         setIsScrollingDown(true);
       } else {
         setIsScrollingDown(false);
       }
-
-      setLastScrollY(currentScrollY);
+      setLastScrollY(window.scrollY);
     };
 
-    locoScroll.on("scroll", handleLocomotiveScroll);
-
-    return () => {
-      locoScroll.off("scroll", handleLocomotiveScroll);
-    };
-  }, [locoScroll, lastScrollY]);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [lastScrollY, isTopPage]);
   const isHome = pathName === "/";
 
   return (
     <header className=" w-full">
       <nav
-        style={
-          isScrollingDown
-            ? { background: "rgba(255, 255, 255, 0.8)", transform: "translateY(-1rem)" }
-            : { background: "transparent", transform: "translateY(-2px)" }
-        }
         className={`${
-          isHome ? `  font-semibold placeholder:text-white  ` : `  text-main2 font-semibold placeholder:text-white  `
-        } fixed inset-0 z-50 max-h-[5rem] lg:max-h-[7rem]    flex flex-col gap-2  py-4 transition-all duration-300 `}
+          isHome
+            ? `  font-semibold placeholder:text-white  ${isScrollingDown && "bg-white/80"}`
+            : `  text-main2 font-semibold placeholder:text-white  `
+        } fixed inset-0 z-50 max-h-[5rem] lg:max-h-[7rem]    flex flex-col gap-2  py-4 transition-all duration-300 ${
+          isScrollingDown
+            ? "translate-y-[-110%]"
+            : !isTopPage && !isScrollingDown
+            ? `  -translate-y-2 lg:-translate-y-5 ${!isHome && "bg-white/80"}`
+            : "translate-y-0"
+        }`}
       >
         {" "}
         <MaxWidthWrapper noPadding>

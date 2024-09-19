@@ -43,6 +43,7 @@ const useLocoScroll = (start: boolean) => {
           height: window.innerHeight,
         };
       },
+      pinType: document.querySelector(".main-container").style.transform ? "transform" : "fixed",
     });
     setLocoScroll(locoScroll);
     const lsUpdate = () => {
