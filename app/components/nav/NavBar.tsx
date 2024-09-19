@@ -35,7 +35,7 @@ const NavBar = () => {
   const pathName = usePathname();
   const user = false;
   useEffect(() => {
-    if (!locoScroll) return; // Ensure the scroll instance is available
+    if (!locoScroll) return;
 
     const handleLocomotiveScroll = (event: any) => {
       const currentScrollY = event.scroll.y; // Locomotive Scroll's Y position
@@ -57,10 +57,10 @@ const NavBar = () => {
       setLastScrollY(currentScrollY);
     };
 
-    locoScroll.on("scroll", handleLocomotiveScroll); // Add Locomotive Scroll event listener
+    locoScroll.on("scroll", handleLocomotiveScroll);
 
     return () => {
-      locoScroll.off("scroll", handleLocomotiveScroll); // Clean up event listener on unmount
+      locoScroll.off("scroll", handleLocomotiveScroll);
     };
   }, [locoScroll, lastScrollY]);
   const isHome = pathName === "/";
@@ -74,7 +74,7 @@ const NavBar = () => {
             : `  text-main2 font-semibold placeholder:text-white  `
         } fixed inset-0 z-50 max-h-[5rem] lg:max-h-[7rem]    flex flex-col gap-2  py-4 transition-all duration-300 ${
           isScrollingDown
-            ? "translate-y-[-110%]"
+            ? "translate-y-[-1rem]"
             : !isTopPage && !isScrollingDown
             ? `  -translate-y-2 lg:-translate-y-5 ${!isHome && "bg-white/80"}`
             : "translate-y-0"
