@@ -9,13 +9,14 @@ import MotionItem from "./defaults/MotionItem";
 import MotionContainer from "./defaults/MotionContainer";
 import { Button } from "@/components/ui/button";
 import Paragraph from "./defaults/Paragraph";
+import { useGSAP } from "@gsap/react";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const ScrollXSections = () => {
   const containerRef = useRef<any>(null);
 
-  useLayoutEffect(() => {
+  useGSAP(() => {
     const container = containerRef.current;
     if (!container) return;
 
@@ -28,7 +29,7 @@ const ScrollXSections = () => {
         scrub: 1,
         pin: true,
         start: "top top",
-        end: () => `+=${container.scrollWidth}`,
+        end: () => `+=${container.scrollWidth - 50}`,
         invalidateOnRefresh: true,
         anticipatePin: 1,
       },
@@ -51,7 +52,7 @@ const ScrollXSections = () => {
 
   return (
     <div className="" style={{ overflow: "hidden" }}>
-      <div ref={containerRef} className="flex  max-h-screen w-[500vw]">
+      <div ref={containerRef} className="flex  h-screen w-[500vw]">
         <div className="section w-[100vw] h-[110vh] lg:h-screen bg-sky-800">
           <MaxWidthWrapper className="flex lg:flex-row h-full  items-center justify-between">
             <MotionItem
