@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  --background: @apply bg-gray-50;
+  --background: @apply bg-white;
   --foreground: #171717;
   scroll-behavior: smooth;
 }

@@ -36,7 +36,7 @@ const AnimatedHeader = () => {
         stagger: 0.3,
         duration: 0.7,
       }
-    );
+    ).to(".over", { overflow: "auto" });
 
     tl.fromTo(
       ".char",
@@ -81,7 +81,9 @@ const AnimatedHeader = () => {
         opacity: 1,
         duration: 0.5,
       }
-    ).to("#img-doc", { rotate: 360, duration: 0.3 });
+    )
+      .to("#img-doc", { rotate: 360, duration: 0.3 })
+      .to(".over", { overflow: "hidden" });
     tl.fromTo(
       "#btn",
       { opacity: 0, rotate: 45, xPercent: -100 },
@@ -105,18 +107,20 @@ const AnimatedHeader = () => {
   }, []);
 
   return (
-    <div className=" h-full flex lg:flex-row flex-col  justify-center items-center py-10">
-      <div className="font-bold flex  gap-2 text-center text-5xl lg:text-7xl">
+    <div className=" h-full  relative  flex lg:flex-row flex-col  justify-center items-center py-10">
+      <div className="font-bold flex  lg:flex-row flex-col gap-2 text-center text-5xl lg:text-7xl">
         <div className=" flex  gap-4 flex-col">
           {/*first 3 words in a flex*/}
-          <div className="flex  justify-center    flex-wrap gap-2 items-center">
-            {words.slice(0, 2).map((word, index) => (
-              <p key={index} className="title text-gray-800  animate-text">
-                {word}
-              </p>
-            ))}
+          <div className="flex  justify-center gap-14     lg:flex-row flex-col lg:gap-2 items-center">
+            <div className="flex gap-2">
+              {words.slice(0, 2).map((word, index) => (
+                <p key={index} className="title text-gray-800  animate-text">
+                  {word}
+                </p>
+              ))}
+            </div>
             <div style={{ lineHeight: 0 }} className="text-right  mr-2">
-              <h2 dir="ltr" className="tabib1  t tabib mx-2">
+              <h2 dir="ltr" className="tabib1   t tabib mx-2">
                 {splitStringUsingRegex(words[2]).map((char, index) => (
                   <p className="char  text-blue-500 inline-block" key={index}>
                     {char}
@@ -129,15 +133,15 @@ const AnimatedHeader = () => {
               <Image src="/heart.png" className=" object-cover" fill alt="tabib" />
             </div>
           </div>
-          {/*last 3 words in a flex*/}
 
-          <div className="flex flex-wrap gap-2  justify-center  items-center">
+          <div className="flex flex-wrap flex-row gap-2 justify-center items-center">
             {words.slice(3).map((word, index) => (
-              <p key={index} className="title2  text-gray-800 animate-text">
+              <p key={index} className="title2 text-gray-800 lg:text-7xl text-3xl animate-text inline sm:block">
                 {word}
               </p>
             ))}
           </div>
+
           <Button id="btn" className=" mt-4 py-6 px-12  justify-center w-fit self-center lg:self-start text-4xl ">
             خدماتنا <ArrowLeft className="w-6 h-6 mr-3 arrow1" />
           </Button>

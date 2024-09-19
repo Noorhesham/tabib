@@ -15,7 +15,7 @@ const Paragraph = ({
 }) => {
   return (
     <p
-      className={` ${className || ""} ${color ? color : " text-gray-700 "} ${size === "lg" ? "text-lg" : "text-sm"} ${
+      className={` ${className || ""} ${color ? color : " text-gray-700 "} ${size === "lg" ? "text-lg" : "text-base"} ${
         full ? "max-w-full" : maxWidth ? "lg:max-w-5xl" : "lg:max-w-xl"
       } font-medium my-2 leading-[1.7] `}
     >

@@ -3,6 +3,7 @@ import "./globals.css";
 
 import { Cairo } from "next/font/google";
 import NavBar from "./components/nav/NavBar";
+import Footer from "./components/Footer";
 const inter = Cairo({ subsets: ["latin"], weight: ["400", "600", "700", "200", "300", "500"] });
 
 export const metadata: Metadata = {
@@ -21,6 +22,7 @@ export default function RootLayout({
         <main data-scroll-container className="main-container">
           <NavBar />
           {children}
+          <Footer />
         </main>
       </body>
     </html>
