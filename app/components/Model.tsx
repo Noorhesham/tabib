@@ -8,7 +8,7 @@ const Space = ({model,position,scale}:{model:string,position?:[number,number,num
   const group = useRef<Group>(null);
   const { nodes, animations, scene } = useGLTF(model);
   const { actions, names } = useAnimations(animations, scene);
-
+console.log(actions)
 
   useFrame(() => {
     if (group.current) {

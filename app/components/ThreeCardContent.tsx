@@ -48,7 +48,7 @@ export function ThreeDCardDemo({
   return (
     <motion.div custom={1} initial="hidden" animate="visible" variants={cardVariants}>
       <CardContainer className="inter-var relative">
-        <CardBody className=" bg-white rounded-[3rem] shadow-md relative group/card dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:bg-black w-full max-w-[20rem] sm:w-[25rem] h-auto p-6 py-7">
+        <CardBody className=" bg-white rounded-[3rem] shadow-md relative group/card dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:bg-black w-full max-w-[50rem] sm:w-[25rem] h-auto p-6 py-7">
           <CardItem translateZ="50" className="text-xl text-center mx-auto font-bold text-[#25333e] dark:text-white">
             {text}
           </CardItem>
@@ -59,7 +59,7 @@ export function ThreeDCardDemo({
           >
             {desc}
           </CardItem>
-          <CardItem translateZ="100" className="w-full h-44 mt-4">
+          <CardItem className="w-full h-44 mt-4">
             {" "}
             {/* Adjust the height */}
             {three ? (

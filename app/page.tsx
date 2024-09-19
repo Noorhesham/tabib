@@ -6,6 +6,11 @@ import ScrollXSections from "./components/ScrollXSections";
 import "locomotive-scroll/src/locomotive-scroll.scss";
 import React, { useEffect } from "react";
 import Loader from "./components/Loader";
+import { ThreeDCardDemo } from "./components/ThreeCardContent";
+import Model3d from "./components/Model3d";
+import GridContainer from "./components/defaults/GridContainer";
+import ThreeDSpace from "./components/ThreeDSpace";
+import MaxWidthWrapper from "./components/defaults/MaxWidthWrapper";
 const cardData = [
   {
     text: "AI-Powered Sales Insights",
@@ -52,6 +57,12 @@ export default function Home() {
         </HeroHighlight>
         <ScrollXSections />
       </section>
+
+      <div className="flex  overflow-hidden  relative  my-20  w-full flex-col  md:flex-row items-center">
+        <h1 className="blue_gradient absolute text-2xl"> هتلاقي احسن العيادات </h1>
+
+        <ThreeDSpace className="w-full  h-[80vh]" />
+      </div>
     </section>
   );
 }

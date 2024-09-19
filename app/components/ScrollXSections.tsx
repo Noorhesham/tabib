@@ -16,39 +16,42 @@ gsap.registerPlugin(ScrollTrigger);
 const ScrollXSections = () => {
   const containerRef = useRef<any>(null);
 
-  useGSAP(() => {
-    const container = containerRef.current;
-    if (!container) return;
+  useGSAP(
+    () => {
+      const container = containerRef.current;
+      if (!container) return;
 
-    const sections = gsap.utils.toArray(".section");
+      const sections = gsap.utils.toArray(".section");
 
-    const timeline = gsap.timeline({
-      scrollTrigger: {
-        trigger: container,
-        scroller: ".main-container",
-        scrub: 1,
-        pin: true,
-        start: "top top",
-        end: () => `+=${container.scrollWidth - 50}`,
-        invalidateOnRefresh: true,
-        anticipatePin: 1,
-      },
-    });
+      const timeline = gsap.timeline({
+        scrollTrigger: {
+          trigger: container,
+          scroller: ".main-container",
+          scrub: 1,
+          pin: true,
+          start: "top top",
+          end: () => `+=${container.scrollWidth - 50}`,
+          invalidateOnRefresh: true,
+          anticipatePin: 1,
+        },
+      });
 
-    // Move the sections horizontally with xPercent
-    timeline.to(sections, {
-      xPercent: -100 * (sections.length - 1), // Move through each section
-      ease: "none", // Keep the animation linear
-    });
+      // Move the sections horizontally with xPercent
+      timeline.to(sections, {
+        xPercent: -100 * (sections.length - 1), // Move through each section
+        ease: "none", // Keep the animation linear
+      });
 
-    // Refresh ScrollTrigger to account for dynamic content
-    ScrollTrigger.refresh();
+      // Refresh ScrollTrigger to account for dynamic content
+      ScrollTrigger.refresh();
 
-    // Cleanup on component unmount
-    return () => {
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-    };
-  }, []);
+      // Cleanup on component unmount
+      return () => {
+        ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+      };
+    },
+    { dependencies: [], scope: containerRef.current }
+  );
 
   return (
     <div className="" style={{ overflow: "hidden" }}>
