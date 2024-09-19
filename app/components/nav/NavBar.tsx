@@ -75,13 +75,7 @@ const NavBar = () => {
         }
         className={`${
           isHome ? `  font-semibold placeholder:text-white  ` : `  text-main2 font-semibold placeholder:text-white  `
-        } fixed inset-0 z-50 max-h-[5rem] lg:max-h-[7rem]    flex flex-col gap-2  py-4 transition-all duration-300 ${
-          isScrollingDown
-            ? "translate-y-[-1rem]"
-            : !isTopPage && !isScrollingDown
-            ? `  -translate-y-2 lg:-translate-y-5 ${!isHome && "bg-white/80"}`
-            : "translate-y-0"
-        }`}
+        } fixed inset-0 z-50 max-h-[5rem] lg:max-h-[7rem]    flex flex-col gap-2  py-4 transition-all duration-300 `}
       >
         {" "}
         <MaxWidthWrapper noPadding>
