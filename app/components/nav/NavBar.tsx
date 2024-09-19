@@ -62,7 +62,7 @@ const NavBar = () => {
     return () => {
       locoScroll.off("scroll", handleLocomotiveScroll); // Clean up event listener on unmount
     };
-  }, [scroll, lastScrollY]);
+  }, [locoScroll, lastScrollY]);
   const isHome = pathName === "/";
 
   return (
