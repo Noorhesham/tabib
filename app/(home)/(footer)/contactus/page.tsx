@@ -4,6 +4,7 @@ import Head1 from "@/app/components/defaults/Head1";
 import MaxWidthWrapper from "@/app/components/defaults/MaxWidthWrapper";
 import Paragraph from "@/app/components/defaults/Paragraph";
 import CustomForm from "@/app/components/forms/CustomForm";
+import MapComponent from "@/app/components/Map";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { PhoneIcon } from "lucide-react";
 import React from "react";
@@ -53,6 +54,7 @@ const page = () => {
             <CustomForm btnStyles=" w-full" btnText="ارسال" form={form} onSubmit={onSubmit} inputs={formArray} />
           </div>
         </GridContainer>
+        <div className=" w-full my-5 h-[350px]">{<MapComponent defaultLocation={{ lat: 31.233334, lng: 31.233334 }} />}</div>
       </MaxWidthWrapper>
     </div>
   );
