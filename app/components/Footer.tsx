@@ -15,7 +15,7 @@ const Footer = () => {
           <Link href={`/aboutus`}> من نحن ؟</Link>
           <Link href={`/find-doctor`}>تصفح الدكاترة </Link>
         </ul>{" "}
-        <div className="flex lg:flex-row flex-col gap-2">
+        <div className="flex lg:flex-row items-center flex-col gap-2">
           <p className=" font-semibold text-center  text-main">
             كل الحقوق محفوظة لفريق<Link href={`/`}> @One More Light</Link>
           </p>

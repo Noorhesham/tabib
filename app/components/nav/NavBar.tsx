@@ -20,6 +20,10 @@ const links = [
     text: "من نحن ؟ ",
     href: "/aboutus",
   },
+  {
+    text: "تواصل معنا ",
+    href: "/contactus",
+  },
 ];
 const NavBar = () => {
   const { locoScroll } = useSmoothScroll();

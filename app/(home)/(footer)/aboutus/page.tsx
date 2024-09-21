@@ -17,22 +17,22 @@ const page = () => {
         <div className=" w-full relative h-96">
           <Image src="/image.png" alt="image" className=" object-cover" fill />
         </div>
-        <GridContainer cols={2} className=" gap-2  mt-5">
+        <div className=" grid md:grid-cols-2 gap-5   mt-5">
           <Head1 size="text-2xl" color=" text-main" title="تشخيص الحالات بشكل ثوري عن طريق ال AI" />
           <div className="flex flex-col gap-5">
             <Paragraph description="تم تصميم منصا لتمكين المرضى من الحصول على ميزات صحية أساسية. بدءًا من الحجز عبر الإنترنت وحتى التواصل في الوقت الفعلي مع الأطباء، نضمن تجربة رعاية صحية سلسة." />
-            <div className=" flex items-start gap-5">
+            <div className=" flex items-stretch gap-5">
               <div className=" flex flex-col items-start">
-                <Head1 size="text-lg" color=" text-main" title="الدقة و الكفاءة" />
+                <Head1 size=" text-base md:text-lg" color=" text-main" title="الدقة و الكفاءة" />
                 <Paragraph description=" استمتع بأوقات استجابة سريعة للتقارير ، مما يعزز كفاءة علاج المرضى." />
               </div>
               <div className=" flex flex-col items-start">
-                <Head1 size="text-lg" color=" text-main" title="الدقة و الكفاءة" />
+                <Head1 size=" text-base md:text-lg" color=" text-main" title="الدقة و الكفاءة" />
                 <Paragraph description=" استخدم الذكاء الاصطناعي لتقليل الخطأ البشري وتحسين دقة التشخيص للحصول على نتائج أفضل." />
               </div>
             </div>
           </div>
-        </GridContainer>
+        </div>
         <MaxWidthWrapper className=" flex flex-col gap-4  items-center ">
           <Head1 title="ليه ممكن تستعمل طيب ؟" className=" text-center" />
           <Paragraph
