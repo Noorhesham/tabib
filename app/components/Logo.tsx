@@ -4,7 +4,7 @@ import React from "react";
 
 const Logo = ({ size = "sm", isdark }: { size?: "sm" | "lg"; isdark?: boolean }) => {
   return (
-    <Link href={"/"} className={` relative ${size === "sm" ? "w-24 h-24" : "w-44 h-44"}`}>
+    <Link href={"/"} className={` relative ${size === "sm" ? "w-24 h-12" : "w-44 h-44"}`}>
       {isdark ? (
         <Image src={"/logo.svg"} className=" object-contain" alt="logo" fill />
       ) : (

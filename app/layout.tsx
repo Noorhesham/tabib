@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import "./locomotive.css";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import "locomotive-scroll/src/locomotive-scroll.scss";
@@ -22,22 +23,20 @@ export default function RootLayout({
   return (
     <html lang="ar">
       <body dir="rtl" className={`${inter.className}  `}>
-       
-          <main>
-            <ToastContainer
-              position="top-center"
-              autoClose={3500}
-              hideProgressBar={false}
-              newestOnTop={false}
-              closeOnClick
-              pauseOnFocusLoss
-              pauseOnHover={false}
-              theme="light"
-            />
+        <main>
+          <ToastContainer
+            position="top-center"
+            autoClose={3500}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            pauseOnFocusLoss
+            pauseOnHover={false}
+            theme="light"
+          />
 
-            {children}
-          </main>
-     
+          {children}
+        </main>
       </body>
     </html>
   );
