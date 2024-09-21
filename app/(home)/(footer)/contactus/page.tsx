@@ -4,10 +4,19 @@ import Head1 from "@/app/components/defaults/Head1";
 import MaxWidthWrapper from "@/app/components/defaults/MaxWidthWrapper";
 import Paragraph from "@/app/components/defaults/Paragraph";
 import CustomForm from "@/app/components/forms/CustomForm";
-import MapComponent from "@/app/components/Map";
+import Spinner from "@/app/components/Spinner";
+const MapComponent = dynamic(() => import("@/app/components/Map"), {
+  loading: () => (
+    <div className=" absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+      <Spinner />
+    </div>
+  ),
+  ssr: false,
+});
 import { zodResolver } from "@hookform/resolvers/zod";
 import { PhoneIcon } from "lucide-react";
-import React from "react";
+import dynamic from "next/dynamic";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 const formArray = [
@@ -26,7 +35,10 @@ const page = () => {
   const form = useForm({
     resolver: zodResolver(schema),
   });
-
+  const [mount, setMount] = React.useState(false);
+  useEffect(() => {
+    setMount(true);
+  }, []);
   const onSubmit = (data: any) => {
     console.log("Form data:", data);
   };
@@ -54,7 +66,9 @@ const page = () => {
             <CustomForm btnStyles=" w-full" btnText="ارسال" form={form} onSubmit={onSubmit} inputs={formArray} />
           </div>
         </GridContainer>
-        <div className=" w-full my-5 h-[350px]">{<MapComponent defaultLocation={{ lat: 31.233334, lng: 31.233334 }} />}</div>
+        <div className=" w-full my-5 h-[350px]">
+          {mount && <MapComponent defaultLocation={{ lat: 31.233334, lng: 31.233334 }} />}
+        </div>
       </MaxWidthWrapper>
     </div>
   );
