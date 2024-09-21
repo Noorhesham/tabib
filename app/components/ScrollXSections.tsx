@@ -59,7 +59,7 @@ const ScrollXSections = () => {
     <div className="" style={{ overflow: "hidden" }}>
       <div ref={containerRef} className="flex  h-screen w-[500vw]">
         <div className="section w-[100vw] h-[110vh] lg:h-screen ">
-          <MaxWidthWrapper className="flex md:flex-row h-full  items-center justify-between">
+          <MaxWidthWrapper className="flex flex-col md:flex-row h-full  items-center justify-between">
             <MotionItem
               nohover
               initial={{ opacity: 0, y: 100 }}
@@ -105,7 +105,7 @@ const ScrollXSections = () => {
               transition={{ duration: 0.6, delay: 0.2 }}
               initial={{ opacity: 0, x: -500 }}
               whileInView={{ opacity: 1, x: 0 }}
-              className="w-1/2"
+              className=" w-full md:w-1/2"
             >
               <AnimatedImage data="animate3.json" className="w-full h-full" />
             </MotionItem>
@@ -132,9 +132,9 @@ const ScrollXSections = () => {
             <MotionItem
               nohover
               transition={{ duration: 0.6, delay: 0.2 }}
-              initial={{ opacity: 0, x: -500 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              className="w-1/2"
+              initial={{ opacity: 0, y: 100 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              className=" w-full md:w-1/2"
             >
               <AnimatedImage className="w-full h-full" />
             </MotionItem>

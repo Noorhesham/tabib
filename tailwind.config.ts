@@ -37,7 +37,7 @@ const config: Config = {
           DEFAULT: "hsl(var(--accent))",
           foreground: "hsl(var(--accent-foreground))",
         },
-        main:{
+        main: {
           DEFAULT: "#013C8C",
         },
         destructive: {
@@ -85,6 +85,7 @@ const config: Config = {
     },
   },
   plugins: [
+    require("tailwindcss-animate"),
     addVariablesForColors,
     function ({ matchUtilities, theme }: any) {
       matchUtilities(

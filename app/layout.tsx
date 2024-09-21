@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
+import "locomotive-scroll/src/locomotive-scroll.scss";
 
-import { Cairo } from "next/font/google";
-import NavBar from "./components/nav/NavBar";
-import Footer from "./components/Footer";
-const inter = Cairo({ subsets: ["latin"], weight: ["400", "600", "700", "200", "300", "500"] });
+import { Almarai } from "next/font/google";
+
+import { SmoothScrollProvider } from "./context/ScrollProviderContext";
+const inter = Almarai({ subsets: ["arabic"], weight: ["400", "700", "300"] });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -17,13 +20,24 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="ar">
       <body dir="rtl" className={`${inter.className}  `}>
-        <main id="smooth-wrapper" className="main-container">
-          <NavBar />
-          {children}
-          <Footer />
-        </main>
+       
+          <main>
+            <ToastContainer
+              position="top-center"
+              autoClose={3500}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              pauseOnFocusLoss
+              pauseOnHover={false}
+              theme="light"
+            />
+
+            {children}
+          </main>
+     
       </body>
     </html>
   );

@@ -32,7 +32,6 @@ const Space = () => {
   let multiplayer = 1;
   useFrame(() => {
     if (group.current) {
-      console.log(group.current.rotation.y);
       if (group.current.rotation.y > 0.5) multiplayer = -1;
       if (group.current.rotation.y < -1.3) multiplayer = 1;
       group.current.rotation.y += 0.002 * multiplayer; // Adjust the rotation speed as needed

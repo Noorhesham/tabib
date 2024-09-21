@@ -18,8 +18,8 @@ const SideNav = ({
 }) => {
   const [mounted, setMounted] = useState(false);
   const pathName = usePathname();
-  const lang = cookies.get("NEXT_LOCALE");
-  const isActive = pathName.replace(`/${lang}`, "") === `${link}`;
+
+  const isActive = pathName.includes(link) || pathName === `${link}`;
 
   useEffect(() => {
     setMounted(true);
@@ -29,11 +29,11 @@ const SideNav = ({
     mounted && (
       <Link
         href={link}
-        className={`flex flex-1  text-base flex-grow w-full lg:py-2 lg:px-4 font-medium duration-150 cursor-pointer md:w-full rounded-lg p-1    items-center gap-2 self-start ${
+        className={`flex flex-1 hover:bg-blue-100 bg-hover text-base flex-grow w-full lg:py-2 lg:px-4 font-medium duration-150 cursor-pointer md:w-full rounded-lg p-1    items-center gap-2 self-start ${
           isActive && !iconsOnly
-            ? " bg-hover  border-l-2 rounded-l-none  border-main2 lg:py-3   text-main2 hover:bg-gray-100 "
+            ? "   border-l-2 rounded-l-none text-sky-500 bg-blue-100  border-main lg:py-3   "
             : iconsOnly && isActive
-            ? "bg-main2 w-fit  text-gray-50 text-center mx-auto"
+            ? " bg-sky-500 w-fit  text-gray-50 text-center mx-auto"
             : ""
         }`}
       >

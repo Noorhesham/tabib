@@ -3,8 +3,8 @@ import Link from "next/link";
 import React from "react";
 import cookies from "js-cookie";
 import MotionItem from "./MotionItem";
-import Head1 from "../Head1";
 import MotionContainer from "./MotionContainer";
+import Head1 from "./Head1";
 
 const Section = ({
   heading,

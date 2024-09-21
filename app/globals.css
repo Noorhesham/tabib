@@ -117,11 +117,59 @@
   }
 }
 
-#smooth-wrapper {
+.main-container {
   overflow: hidden;
-  height: 100%;
+  position: relative;
 }
+.arrow1 {
+  animation: slide1 1s ease-in-out infinite;
+  margin-left: 9px;
+}
+@keyframes slide1 {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
 
-#smooth-content {
-  min-height: 100vh;
+  50% {
+    transform: translate(10px, 0);
+  }
+}
+.glass-white {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+.glass-white-1 {
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+.glass2 {
+  /* From https://css.glass */
+  background: rgba(52, 91, 131, 0.39);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5.7px);
+  -webkit-backdrop-filter: blur(5.7px);
+  border: 1px solid rgba(52, 91, 131, 0.3);
+}
+.CircularProgressbar-path {
+  stroke: #d66db8 !important;
+}
+.CircularProgressbar-text {
+  fill: #e27a96 !important;
+}
+.react-tel-input {
+  padding: 0 !important;
+}
+.form-control {
+  @apply py-2 px-4  w-full  border-none pr-14 !important;
+}
+.special-label {
+  display: none !important;
 }

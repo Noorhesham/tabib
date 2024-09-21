@@ -2,22 +2,18 @@
 import React, { useEffect, useState } from "react";
 import Logo from "../Logo";
 import NavLink from "./NavLink";
-
 import MaxWidthWrapper from "../defaults/MaxWidthWrapper";
 import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
-
 import PhoneNav from "./PhoneNav";
 import { Button } from "@/components/ui/button";
-import { toast } from "react-toastify";
-import MotionItem from "../defaults/MotionItem";
-import { AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
-import useScrollSmoother from "@/app/hooks/useLocoScroll";
+import { useSmoothScroll } from "@/app/context/ScrollProviderContext";
+
 const links = [
   {
     text: "تصفح العيادات",
-    href: "/shop",
+    href: "/find-doctor",
   },
 
   {
@@ -26,7 +22,7 @@ const links = [
   },
 ];
 const NavBar = () => {
-  useScrollSmoother(true);
+  const { locoScroll } = useSmoothScroll();
   const [isScrollingDown, setIsScrollingDown] = useState(false);
   const [active, setIsActive] = useState(false);
   const router = useRouter();
@@ -35,35 +31,45 @@ const NavBar = () => {
   const pathName = usePathname();
   const user = false;
   useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY < 50) {
+    if (!locoScroll) return;
+
+    const handleLocoScroll = (scroll) => {
+      const currentScrollY = scroll.scroll.y;
+
+      // Check if at the top of the page
+      if (currentScrollY < 50) {
         setIsTopPage(true);
-      } else setIsTopPage(false);
-      if (window.scrollY > lastScrollY) {
+      } else {
+        setIsTopPage(false);
+      }
+
+      if (currentScrollY > lastScrollY) {
         setIsScrollingDown(true);
       } else {
         setIsScrollingDown(false);
       }
-      setLastScrollY(window.scrollY);
+
+      console.log(isScrollingDown);
+      setLastScrollY(currentScrollY);
     };
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [lastScrollY, isTopPage]);
+    // Attach event listener to locoScroll
+    locoScroll.on("scroll", handleLocoScroll);
+  }, [locoScroll, lastScrollY]);
   const isHome = pathName === "/";
 
   return (
-    <header className=" w-full">
+    <header className="  w-full">
       <nav
         className={`${
           isHome
-            ? `  font-semibold placeholder:text-white  ${isScrollingDown && "bg-white/80"}`
-            : `  text-main2 font-semibold placeholder:text-white  `
-        } fixed inset-0 z-50 max-h-[5rem] lg:max-h-[7rem]    flex flex-col gap-2  py-4 transition-all duration-300 ${
+            ? `font-semibold placeholder:text-white  ${isScrollingDown && ""}`
+            : `text-main2 font-semibold placeholder:text-white`
+        } fixed inset-0 z-50 max-h-[5rem] lg:max-h-[7rem] flex flex-col gap-2 py-4 transition-all duration-300 ${
           isScrollingDown
             ? "translate-y-[-110%]"
             : !isTopPage && !isScrollingDown
-            ? `  -translate-y-2 lg:-translate-y-5 ${!isHome && "bg-white/80"}`
+            ? `-translate-y-2  bg-white/50 lg:-translate-y-5 `
             : "translate-y-0"
         }`}
       >

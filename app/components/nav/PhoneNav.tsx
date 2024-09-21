@@ -126,7 +126,7 @@ const MenuSvg = ({ openNavigation, isHome }: { openNavigation: any; isHome?: boo
         width="20"
         height="2"
         rx="1"
-        fill={isHome ? "white" : "#3AC0E5"}
+        fill={"#3AC0E5"}
         transform={`rotate(${openNavigation ? "45" : "0"})`}
       />
       <rect
@@ -135,7 +135,7 @@ const MenuSvg = ({ openNavigation, isHome }: { openNavigation: any; isHome?: boo
         width="20"
         height="2"
         rx="1"
-        fill={isHome ? "white" : "#3AC0E5"}
+        fill={"#3AC0E5"}
       />
       <rect
         className="transition-all origin-center"
@@ -143,7 +143,7 @@ const MenuSvg = ({ openNavigation, isHome }: { openNavigation: any; isHome?: boo
         width="20"
         height="2"
         rx="1"
-        fill={isHome ? "white" : "#3AC0E5"}
+        fill={"#3AC0E5"}
         transform={`rotate(${openNavigation ? "-45" : "0"})`}
       />
     </svg>

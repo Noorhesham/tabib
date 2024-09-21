@@ -1,17 +1,18 @@
-"use client";
 import React, { useEffect, useLayoutEffect, useState } from "react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
+import { usePathname, useRouter } from "next/navigation";
 
-const useLocoScroll = (start: boolean) => {
+const useLocoScroll = () => {
   gsap.registerPlugin(ScrollTrigger);
   const [locoScroll, setLocoScroll] = useState(null);
+  const pathname = usePathname();
+  console.log(pathname)
   useLayoutEffect(() => {
-    if (!start) return;
     const LocomotiveScroll = require("locomotive-scroll").default;
     const scrollEl = document.querySelector(".main-container");
 
-    const locoScroll = new LocomotiveScroll({
+    const locoScrollInstance = new LocomotiveScroll({
       el: scrollEl,
       smooth: true,
       multiplier: 1.5,
@@ -20,20 +21,18 @@ const useLocoScroll = (start: boolean) => {
       },
     });
 
-    locoScroll.on("scroll", ScrollTrigger.update);
+    locoScrollInstance.on("scroll", ScrollTrigger.update);
 
     ScrollTrigger.scrollerProxy(scrollEl, {
       scrollTop(value) {
-        if (locoScroll) {
-          return arguments.length ? locoScroll.scrollTo(value, 0, 0) : locoScroll.scroll.instance.scroll.y;
-        }
-        return null;
+        return arguments.length
+          ? locoScrollInstance.scrollTo(value, 0, 0)
+          : locoScrollInstance.scroll.instance.scroll.y;
       },
       scrollLeft(value) {
-        if (locoScroll) {
-          return arguments.length ? locoScroll.scrollTo(value, 0, 0) : locoScroll.scroll.instance.scroll.x;
-        }
-        return null;
+        return arguments.length
+          ? locoScrollInstance.scrollTo(value, 0, 0)
+          : locoScrollInstance.scroll.instance.scroll.x;
       },
       getBoundingClientRect() {
         return {
@@ -43,18 +42,25 @@ const useLocoScroll = (start: boolean) => {
           height: window.innerHeight,
         };
       },
-      pinType: document.querySelector(".main-container").style.transform ? "transform" : "fixed",
+      pinType: scrollEl.style.transform ? "transform" : "fixed",
     });
-    setLocoScroll(locoScroll);
-    const lsUpdate = () => {
-      if (locoScroll) {
-        locoScroll.update();
-      }
-    };
+
+    setLocoScroll(locoScrollInstance);
+
+    const lsUpdate = () => locoScrollInstance.update();
 
     ScrollTrigger.addEventListener("refresh", lsUpdate);
     ScrollTrigger.refresh();
-  }, [start]);
+
+    // Cleanup on component unmount
+    return () => {
+      if (locoScrollInstance) {
+        ScrollTrigger.removeEventListener("refresh", lsUpdate);
+        locoScrollInstance.destroy(); // Destroy Locomotive Scroll instance
+      }
+    };
+  }, [pathname]);
+
   return { locoScroll };
 };
 
