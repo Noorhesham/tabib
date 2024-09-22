@@ -1,19 +1,21 @@
 import { z } from "zod";
 
 export const loginSchema = z.object({
-  email: z.string().min(1, { message: "البريد الالكتروني مطلوب" }).email({ message: "البريد الالكتروني غير صالح" }),
-  password: z.string().min(1, { message: "كلمة المرور مطلوبة" }),
+  Email: z.string().min(1, { message: "البريد الالكتروني مطلوب" }).email({ message: "البريد الالكتروني غير صالح" }),
+  Password: z.string().min(1, { message: "كلمة المرور مطلوبة" }),
 });
 export const registerPatientSchema = z
   .object({
-    firstName: z.string().min(1, "الاسم الأول مطلوب"),
-    lastName: z.string().min(1, "اسم العائلة مطلوب"),
-    phoneNumber: z.string().min(10, "رقم الهاتف يجب أن يكون 10 أرقام على الأقل"),
-    email: z.string().email("البريد الإلكتروني غير صالح"),
-    password: z.string().min(6, "كلمة المرور يجب أن تكون 6 أحرف على الأقل"),
-    confirmPassword: z.string().min(6, "تأكيد كلمة المرور يجب أن تكون 6 أحرف على الأقل"),
+    FirstName: z.string().min(1, "الاسم الأول مطلوب"),
+    LastName: z.string().min(1, "اسم العائلة مطلوب"),
+    PhoneNumber: z.string().min(10, "رقم الهاتف يجب أن يكون 10 أرقام على الأقل"),
+    Email: z.string().email("البريد الإلكتروني غير صالح"),
+    Password: z.string().min(6, "كلمة المرور يجب أن تكون 6 أحرف على الأقل"),
+    ConfirmPassword: z.string().min(6, "تأكيد كلمة المرور يجب أن تكون 6 أحرف على الأقل"),
+    Gender: z.union([z.string(), z.number()]),
+    Age: z.any(),
   })
-  .refine((data) => data.password === data.confirmPassword, {
+  .refine((data) => data.Password === data.ConfirmPassword, {
     message: "كلمة المرور وتأكيد كلمة المرور غير متطابقتين",
     path: ["confirmPassword"],
   });

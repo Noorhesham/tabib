@@ -11,15 +11,17 @@ import Link from "next/link";
 import { loginSchema } from "../schemas";
 import { login } from "../actions/action";
 import { toast } from "react-toastify";
-
+import axios from "axios";
+import { BASE_URL } from "../constants";
+import { useRouter } from "next/navigation";
 const loginArray = [
   {
-    name: "email",
+    name: "Email",
     placeholder: "البريد الالكتروني",
     label: "البريد الالكتروني",
   },
   {
-    name: "password",
+    name: "Password",
     type: "password",
     password: true,
     noProgress: true,
@@ -31,23 +33,23 @@ const Login = () => {
   const [serverError, setServerError] = useState();
   const form = useForm({
     resolver: zodResolver(loginSchema),
-    defaultValues: {
-      useEmail: false,
-      username: "",
-      password: "",
-    },
+
     mode: "onChange",
   });
+  const router = useRouter();
   const [isPending, startTransition] = useTransition();
   const onSubmit = (data: z.infer<typeof loginSchema>) => {
     console.log(data);
     startTransition(async () => {
       try {
+        // const res = await axios.post(`${BASE_URL}Authentication/Login`, data);
         const res = await login(data);
-        console.log(res);
-        if (res.success) toast.success("تم تسجيل الدخول بنجاح");
-        else setServerError(res.message);
+        console.log("Login Response:", res);
+        if (res.isSucceeded) toast.success("تم تسجيل الدخول بنجاح");
+        if (res.roles.includes("Patient")) return router.push("/");
+        if (res.roles.includes("Doctor")) return router.push("/clincs");
       } catch (err: any) {
+        console.error("Error:", err);
         setServerError(err.message);
       }
     });

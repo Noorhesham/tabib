@@ -1,51 +1,44 @@
+"use server";
 import { z } from "zod";
 import { loginSchema, registerPatientSchema, registerDoctorSchema, userSchema } from "../schemas";
 import { BASE_URL } from "../constants";
 import { catchError } from "@/lib/utils";
+import { cookies } from "next/headers";
+import axios from "axios";
 
 export const login = async (data: z.infer<typeof loginSchema>) => {
-  console.log(data);
   const safeData = loginSchema.parse(data);
+  try {
+    const res = await axios.post(`${BASE_URL}Authentication/Login`, safeData);
 
-  return catchError(async () => {
-    const res = await fetch(`${BASE_URL}Authentication/Login`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(safeData),
-    });
-
-    if (!res.ok) {
-      throw new Error("Login failed");
+    console.log(res);
+    if (res.data.token) {
+      cookies().set("token", res.data.token);
+      cookies().set("id", res.data.id);
     }
 
-    const result = await res.json();
-    console.log(result);
-    return result;
-  });
+    return res.data;
+  } catch (error) {
+    console.log(error);
+    throw new Error("Login failed");
+  }
 };
 export const register = async (
   data: z.infer<typeof registerPatientSchema | typeof registerDoctorSchema>,
   role: "patient" | "doctor"
 ) => {
+  const schema = role === "patient" ? registerPatientSchema : registerDoctorSchema;
   console.log(data);
-  const safeData = loginSchema.parse(data);
-
+  const safeData = schema.parse(data);
+  console.log(safeData);
   return catchError(async () => {
-    const res = await fetch(`${BASE_URL}Authentication/${role === "patient" ? "RegisterPatient" : "RegisterDoctor"}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(safeData),
-    });
-    if (!res.ok) {
-      throw new Error("Register failed");
-    }
-    const result = await res.json();
-    console.log(result);
-    return result;
+    const res = await axios.post(
+      `${BASE_URL}Authentication/${role === "patient" ? "RegisterPatient" : "RegisterDoctor"}`,
+      safeData
+    );
+    console.log(res);
+
+    return res.data;
   });
 };
 export const updateUser = async (data: z.infer<typeof userSchema>) => {

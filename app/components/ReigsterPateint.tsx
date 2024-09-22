@@ -1,6 +1,6 @@
 import React, { useState, useTransition } from "react";
-import Logo from "./Logo";
-import Section from "./defaults/Section";
+
+import axios from "axios";
 import { useForm } from "react-hook-form";
 import z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -8,23 +8,46 @@ import CustomForm from "./forms/CustomForm";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { registerPatientSchema } from "../schemas";
-import { register } from "../actions/action";
 import { toast } from "react-toastify";
-import Head1 from "./defaults/Head1";
+import { BASE_URL } from "../constants";
 
 // Arabic form fields for patient registration
 const registerPatientArray = [
-  { name: "firstName", placeholder: "الاسم الأول", label: "الاسم الأول" },
-  { name: "lastName", placeholder: "اسم العائلة", label: "اسم العائلة" },
-  { name: "phoneNumber", placeholder: "رقم الهاتف", label: "رقم الهاتف" },
-  { name: "email", placeholder: "البريد الإلكتروني", label: "البريد الإلكتروني", type: "email" },
-  { name: "password", placeholder: "كلمة المرور", label: "كلمة المرور", type: "password", password: true },
+  { name: "FirstName", placeholder: "الاسم الأول", label: "الاسم الأول" },
+  { name: "LastName", placeholder: "اسم العائلة", label: "اسم العائلة" },
+  { name: "PhoneNumber", placeholder: "رقم الهاتف", label: "رقم الهاتف" },
+  { name: "Email", placeholder: "البريد الإلكتروني", label: "البريد الإلكتروني", type: "email" },
+  { name: "Password", placeholder: "كلمة المرور", label: "كلمة المرور", type: "password", password: true },
   {
-    name: "confirmPassword",
+    name: "ConfirmPassword",
     placeholder: "تأكيد كلمة المرور",
     label: "تأكيد كلمة المرور",
     type: "password",
     password: true,
+  },
+  {
+    name: "Age",
+    placeholder: "العمر",
+    label: "العمر",
+    type: "number",
+    password: false,
+  },
+  {
+    name: "Gender",
+    placeholder: "النوع",
+    label: "النوع",
+
+    select: true,
+    options: [
+      {
+        label: "ذكر",
+        value: "true",
+      },
+      {
+        label: "انثى",
+        value: "false",
+      },
+    ],
   },
 ];
 
@@ -32,27 +55,26 @@ const RegisterPatient = () => {
   const [serverError, setServerError] = useState();
   const form = useForm({
     resolver: zodResolver(registerPatientSchema),
-    defaultValues: {
-      firstName: "",
-      lastName: "",
-      phoneNumber: "",
-      email: "",
-      password: "",
-      confirmPassword: "",
-    },
     mode: "onChange",
   });
 
   const [isPending, startTransition] = useTransition();
 
   const onSubmit = (data: z.infer<typeof registerPatientSchema>) => {
+    const formData = new FormData();
+    for (const [key, value] of Object.entries(data)) {
+      formData.append(key, value);
+    }
     startTransition(async () => {
       try {
-        const res = await register(data, "patient");
+        console.log(data);
+        const res = await axios.post(`${BASE_URL}Authentication/RegisterPatient`, formData);
+        console.log(res);
         if (res.success) toast.success("تم تسجيل المريض بنجاح");
         else setServerError(res.message);
       } catch (err: any) {
-        setServerError(err.message);
+        console.log(err);
+        setServerError(err.response.data||err.response.data.title);
       }
     });
   };

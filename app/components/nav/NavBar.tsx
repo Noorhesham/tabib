@@ -9,7 +9,8 @@ import PhoneNav from "./PhoneNav";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useSmoothScroll } from "@/app/context/ScrollProviderContext";
-
+import { useGetUser } from "@/lib/queryFunctions";
+import cookies from "js-cookie";
 const links = [
   {
     text: "تصفح العيادات",
@@ -26,6 +27,8 @@ const links = [
   },
 ];
 const NavBar = () => {
+  const { data, isLoading } = useGetUser();
+  console.log(data);
   const { locoScroll } = useSmoothScroll();
   const [isScrollingDown, setIsScrollingDown] = useState(false);
   const [active, setIsActive] = useState(false);
@@ -53,7 +56,6 @@ const NavBar = () => {
         setIsScrollingDown(false);
       }
 
-      console.log(isScrollingDown);
       setLastScrollY(currentScrollY);
     };
 
@@ -118,7 +120,14 @@ const NavBar = () => {
                 </>
               ) : (
                 <div>
-                  <Button onClick={async () => {}} className=" text-xs  md:text-sm  px-4 lg:px-8 rounded-full">
+                  <Button
+                    onClick={async () => {
+                      cookies.remove("token");
+                      cookies.remove("id");
+                      router.refresh();
+                    }}
+                    className=" text-xs  md:text-sm  px-4 lg:px-8 rounded-full"
+                  >
                     تسجيل الخروج
                   </Button>{" "}
                   <Link href={user ? "/dashboard" : "/signup"}>

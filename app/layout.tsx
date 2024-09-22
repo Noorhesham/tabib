@@ -8,6 +8,7 @@ import "locomotive-scroll/src/locomotive-scroll.scss";
 import { Almarai } from "next/font/google";
 
 import { SmoothScrollProvider } from "./context/ScrollProviderContext";
+import QueryProvider from "@/lib/QueryProvider";
 const inter = Almarai({ subsets: ["arabic"], weight: ["400", "700", "300"] });
 
 export const metadata: Metadata = {
@@ -23,20 +24,22 @@ export default function RootLayout({
   return (
     <html lang="ar">
       <body dir="rtl" className={`${inter.className}  `}>
-        <main>
-          <ToastContainer
-            position="top-center"
-            autoClose={3500}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick
-            pauseOnFocusLoss
-            pauseOnHover={false}
-            theme="light"
-          />
+        <QueryProvider>
+          <main>
+            <ToastContainer
+              position="top-center"
+              autoClose={3500}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              pauseOnFocusLoss
+              pauseOnHover={false}
+              theme="light"
+            />
 
-          {children}
-        </main>
+            {children}
+          </main>
+        </QueryProvider>
       </body>
     </html>
   );

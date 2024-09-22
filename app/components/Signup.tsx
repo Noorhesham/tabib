@@ -15,7 +15,7 @@ const Signup = () => {
       <Head1 className=" text-center mt-4 " size="text-2xl" title={`تسجيل${doctor ? " طبيب" : " مريض"}`} />
       <div className=" flex mt-8 self-center items-center gap-4">
         <Label>سجل كطبيب</Label>
-        <Switch noSwitch id="sale" className="" onCheckedChange={setDoctor} />
+        <Switch noSwitch id="sale" className="" onCheckedChange={() => setDoctor(!doctor)} />
         <Label>سجل كمريض</Label>
       </div>
       {doctor ? <RegisterDoctor /> : <RegisterPatient />}

@@ -9,6 +9,7 @@ const FormSelect = ({ name, label, placeholder, description, id, options, select
 
   // Filter out the selected value from the options
   const filteredOptions = options?.filter((p) => !selected?.includes(p._id));
+
   return (
     <FormField
       control={form.control}
@@ -20,8 +21,8 @@ const FormSelect = ({ name, label, placeholder, description, id, options, select
             <FormLabel className=" uppercase">{label}</FormLabel>
             <Select onValueChange={field.onChange} defaultValue={field.value}>
               <FormControl>
-                <SelectTrigger className="  shadow-sm">
-                  <SelectValue placeholder={placeholder || "SELECT"}>{selected && selected.name}</SelectValue>
+                <SelectTrigger dir="rtl" className="  text-right shadow-sm">
+                  <SelectValue placeholder={placeholder || "SELECT"}>{selected && selected.label}</SelectValue>
                 </SelectTrigger>
               </FormControl>
               <SelectContent>
